@@ -7,6 +7,18 @@ This document tracks all modifications made to the Modoboa codebase for the Purp
 - **Upstream:** Modoboa (public fork)
 - **Fork Date:** 2026-05-16
 - **Purpose:** Extend Modoboa with plan-tier awareness, quotas, and custom API endpoints for PurpleToad integration
+- **Current Commit:** `44540b6a1` — "feat: add development Docker configuration and core test project scaffolding"
+- **Docker Image:** `python:3.12-alpine` base, builds from `docker/Dockerfile.dev`
+- **API Base:** `https://localhost:8080/api/v1/`
+- **Auth Token:** `f08124c0459b97a4398ce6d52f16821484612765`
+
+## Baseline Verification (2026-05-16)
+
+- [x] Container builds successfully from `docker/Dockerfile.dev`
+- [x] Container starts with `docker compose up -d modoboa`
+- [x] Port mapping `8080:8000` active
+- [x] HTTPS server responds (self-signed cert via `runserver_plus`)
+- [ ] API `/api/v1/core/` returns 500 — needs database initialization (expected for dev setup)
 
 ## Planned Modifications
 
