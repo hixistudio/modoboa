@@ -1,4 +1,4 @@
-FROM python:3.14-alpine AS base
+FROM python:3.12-alpine AS base
 
 LABEL org.opencontainers.image.authors="Antoine Nguyen <tonio@ngyn.org>"
 
@@ -23,6 +23,7 @@ RUN pip-compile --extra=ldap --output-file=ldap-requirements.txt pyproject.toml
 RUN pip-compile --extra=dev --output-file=dev-requirements.txt pyproject.toml
 RUN pip-compile --extra=test --output-file=test-requirements.txt pyproject.toml
 RUN pip install -r requirements.txt -r mysql-requirements.txt -r ldap-requirements.txt -r test-requirements.txt -r dev-requirements.txt
+RUN pip install psycopg2-binary
 
 FROM base AS run
 COPY docker/doveadm /usr/local/bin

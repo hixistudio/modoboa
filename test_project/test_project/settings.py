@@ -13,6 +13,17 @@ import os
 
 from modoboa.test_settings import *  # noqa
 
+# Override database settings from environment
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', 'modoboa'),
+        'USER': os.environ.get('DB_USER', 'modoboa'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'modoboa'),
+        'HOST': os.environ.get('DB_HOST', 'postgres'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
@@ -115,7 +126,7 @@ MODOBOA_APPS = (
     "modoboa.contacts",
     "modoboa.calendars",
     "modoboa.webmail",
-    "modoboa.amavis",
+    # "modoboa.amavis",
 )
 
 try:
@@ -435,12 +446,12 @@ TEST_RUNNER = "modoboa.lib.test_runners.UnManagedModelTestRunner"
 # We force sqlite backend for tests because the generated database is
 # not the same as the one provided by amavis...
 
-DATABASES["amavis"] = {  # noqa
-    "ENGINE": "django.db.backends.sqlite3",
-    "NAME": "amavis.db",
-    "PORT": "",
-    "ATOMIC_REQUESTS": True,
-}
+# DATABASES["amavis"] = {  # noqa
+#     "ENGINE": "django.db.backends.sqlite3",
+#     "NAME": "amavis.db",
+#     "PORT": "",
+#     "ATOMIC_REQUESTS": True,
+# }
 
 # Uncomment this in dev mode (docker)
 # DATABASES["amavis"] = {  # NOQA
@@ -451,7 +462,7 @@ DATABASES["amavis"] = {  # noqa
 #     "PASSWORD": "Password1000",
 # }
 
-DATABASE_ROUTERS = ["modoboa.amavis.dbrouter.AmavisRouter"]
+# DATABASE_ROUTERS = ["modoboa.amavis.dbrouter.AmavisRouter"]
 
 AMAVIS_DEFAULT_DATABASE_ENCODING = "UTF-8"
 # AMAVIS_DEFAULT_DATABASE_ENCODING = "LATIN1"

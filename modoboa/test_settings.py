@@ -48,10 +48,10 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": "modoboa",
-            "USER": "postgres",
-            "PASSWORD": "postgres",
-            "HOST": "localhost",
+            "NAME": os.environ.get("DB_NAME", "modoboa"),
+            "USER": os.environ.get("DB_USER", "postgres"),
+            "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
+            "HOST": os.environ.get("DB_HOST", "localhost"),
             "PORT": os.environ.get("POSTGRES_PORT", "5432"),
             "ATOMIC_REQUESTS": True,
             "OPTIONS": {"client_encoding": "UTF8", "sslmode": "disable"},
