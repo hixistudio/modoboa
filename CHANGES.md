@@ -20,23 +20,14 @@ This document tracks all modifications made to the Modoboa codebase for the Purp
 - [x] HTTPS server responds (self-signed cert via `runserver_plus`)
 - [ ] API `/api/v1/core/` returns 500 — needs database initialization (expected for dev setup)
 
-## Planned Modifications
+## Changes Made
 
-### 1. Plan Tier Support
-- Add `plan_tier` field to User/Domain models
-- Enforce domain and mailbox quotas based on plan tier
-
-### 2. Custom API Endpoints
-- `GET /api/v1/plan-usage/` — Return plan limits and current usage
-- `GET /api/v1/account-quota/` — Return account-level quota data
-
-### 3. Quota Extensions
-- Extend domain quota model with custom fields
-- Add storage tracking per mailbox
+### 1. ALLOWED_HOSTS
+- Expanded `ALLOWED_HOSTS` in `test_project/test_project/settings.py` to include Docker network IPs (`172.20.0.10`–`172.20.0.20`) and service names (`api`, `api-unsecured`, `modoboa`) for inter-service communication.
 
 ## Integration Notes
 
-- Modoboa API base URL: `http://modoboa:8000/api/v1`
+- Modoboa API base URL: `https://modoboa:8000/api/v1`
 - Auth token: `f08124c0459b97a4398ce6d52f16821484612765`
 - PurpleToad API communicates with Modoboa via REST API
 
